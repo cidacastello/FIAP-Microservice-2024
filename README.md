@@ -83,12 +83,18 @@ INSERT INTO tb_pagamento(valor, nome, numero_do_cartao, validade, codigo_de_segu
 ##### Dependência Maven no pom.xml
 
 ```xml
+<!--Swagger-->
 <dependency>
-    <groupId>org.springdoc</groupId>
-    <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-    <version>2.1.0</version>
+	<groupId>org.springdoc</groupId>
+	<artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
+	<version>2.6.0</version>
 </dependency>
 ```
 
 Iniciar a aplicação e acessar no navegador:
+
+Documentação em uma página web para navegar e fazer testes, parecido com Postman, Insomnia.
 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+
+Gera um JSON com a documentação, e podemos usar ferramentas que automatizam a criação do cliente dessa API com base nesse JSON.
+[http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
