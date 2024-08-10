@@ -70,17 +70,13 @@ INSERT INTO tb_pagamento(valor, nome, numero_do_cartao, validade, codigo_de_segu
 
 ```
 
-
-
-
-
-
-
 ***
 ### Swagger e OpenAPI 3.0
 #### Documentação de API e Microsserviços com Swagger e OpenAPI 3.0
 
 ##### Dependência Maven no pom.xml
+
+[https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui](https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui)
 
 ```xml
 <!--Swagger-->
@@ -96,5 +92,5 @@ Iniciar a aplicação e acessar no navegador:
 Documentação em uma página web para navegar e fazer testes, parecido com Postman, Insomnia.
 [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
 
-Gera um JSON com a documentação, e podemos usar ferramentas que automatizam a criação do cliente dessa API com base nesse JSON.
+Gerando um JSON com a documentação, então podemos usar ferramentas que automatizam a criação do cliente dessa API com base nesse JSON.
 [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
