@@ -94,3 +94,29 @@ Documentação em uma página web para navegar e fazer testes, parecido com Post
 
 Gerando um JSON com a documentação, então podemos usar ferramentas que automatizam a criação do cliente dessa API com base nesse JSON.
 [http://localhost:8080/v3/api-docs](http://localhost:8080/v3/api-docs)
+
+
+***
+
+### API ViaCEP
+
+ViaCEP: https://viacep.com.br/
+
+Para realizar a serialização/desserialização podemos utilizar a biblioteca ***Jackson*** que transforma objetos Java em JSON (serialização) e vice-versa (desserialização).
+
+##### Dependência Maven no pom.xml 
+
+https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind/2.17.2
+
+```xml
+
+<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.17.2</version>
+</dependency>
+
+```
+
+***
