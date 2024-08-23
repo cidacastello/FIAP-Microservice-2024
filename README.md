@@ -120,3 +120,20 @@ https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind/2
 ```
 
 ***
+### ModelMapper
+#### Dependência no pom.xml
+
+Adicionar a dependêndia da ***library*** no `pom.xml`
+
+https://mvnrepository.com/artifact/org.modelmapper/modelmapper
+
+
+```xml
+<!-- https://mvnrepository.com/artifact/org.modelmapper/modelmapper -->
+<dependency>
+    <groupId>org.modelmapper</groupId>
+    <artifactId>modelmapper</artifactId>
+    <version>3.2.1</version>
+</dependency>
+
+```
