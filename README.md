@@ -137,3 +137,116 @@ https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 </dependency>
 
 ```
+
+### Comunicação entre Microsserviços
+#### Eureka Discovery Client - Dependencies
+##### MS-Pagamentos
+
+Adicionar a dependência no `pom.xml` do MS-Pagamentos
+
+```xml
+<!--    código omitido-->
+ <properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2023.0.3</spring-cloud.version>
+  </properties>
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
+  <!--    código omitido-->
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!--    código omitido-->
+
+```
+
+Configurações do application.properties
+
+```properties
+
+spring.application.name=ms-pagamento
+
+spring.profiles.active=test
+spring.jpa.open-in-view=false
+
+# É preciso passar a configuração eureka.client.serviceUrl.defaultZone
+# e o localhost 8081, onde o Eureka Server está recebendo as requisições
+eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
+
+#define a porta para o Eureka controlar em qual porta ele vai subir o serviço
+server.port=0
+```
+
+##### MS-Pedidos
+
+
+Adicionar a dependência no `pom.xml` do MS-Pedidos
+
+```xml
+<!--    código omitido-->
+ <properties>
+    <java.version>17</java.version>
+    <spring-cloud.version>2023.0.3</spring-cloud.version>
+  </properties>
+  <dependencies>
+
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+    </dependency>
+
+  <!--    código omitido-->
+
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>${spring-cloud.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <!--    código omitido-->
+
+```
+
+Configurações do application.properties
+
+```properties
+
+spring.application.name=ms-pagamento
+
+spring.profiles.active=test
+spring.jpa.open-in-view=false
+
+# É preciso passar a configuração eureka.client.serviceUrl.defaultZone
+# e o localhost 8081, onde o Eureka Server está recebendo as requisições
+eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
+
+#define a porta para o Eureka controlar em qual porta ele vai subir o serviço
+server.port=0
+```
+
+
