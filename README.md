@@ -137,6 +137,7 @@ https://mvnrepository.com/artifact/org.modelmapper/modelmapper
 </dependency>
 
 ```
+***
 
 ### Comunicação entre Microsserviços
 #### Eureka Discovery Client - Dependencies
@@ -193,9 +194,7 @@ eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
 #define a porta para o Eureka controlar em qual porta ele vai subir o serviço
 server.port=0
 ```
-
 ##### MS-Pedidos
-
 
 Adicionar a dependência no `pom.xml` do MS-Pedidos
 
@@ -232,7 +231,7 @@ Adicionar a dependência no `pom.xml` do MS-Pedidos
 
 ```
 
-Configurações do application.properties
+Configurações do `application.properties`
 
 ```properties
 
@@ -248,5 +247,37 @@ eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
 #define a porta para o Eureka controlar em qual porta ele vai subir o serviço
 server.port=0
 ```
+***
 
+ ### Gateway
 
+ Acrescentar em `application.properties`.
+
+```properties
+ spring.application.name=gateway
+
+# Porta padrão
+server.port=8082
+
+# Endereço do Eureka - igual nos MS's
+eureka.client.serviceUrl.defaultZone=http://localhost:8081/eureka
+
+# Processo de descoberta
+spring.cloud.gateway.discovery.locator.enabled=true
+
+# Define que o nome das aplicações serão em letras minúsculas
+spring.cloud.gateway.discovery.locator.lowerCaseServiceId=true
+
+```
+***
+### Spring Cloud OpenFeign
+
+Dependência Spring Cloud OpenFeign
+
+Adicionar a dependência no `pom.xml` do MS-Pagamentos.
+```xml
+<dependency>
+  <groupId>org.springframework.cloud</groupId>
+  <artifactId>spring-cloud-starter-openfeign</artifactId>
+</dependency>
+```
