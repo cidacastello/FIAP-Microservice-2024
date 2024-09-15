@@ -281,3 +281,39 @@ Adicionar a dependência no `pom.xml` do MS-Pagamentos.
   <artifactId>spring-cloud-starter-openfeign</artifactId>
 </dependency>
 ```
+***
+
+### CircuitBreaker e Fallback
+
+#### Dependências
+
+Adicionar as dependências no `pom.xml` do MS-Pagamentos.
+
+Dependência do resilience4j-spring-boot3
+https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot3/2.2.0
+
+```xml
+
+<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-spring-boot3 -->
+<dependency>
+    <groupId>io.github.resilience4j</groupId>
+    <artifactId>resilience4j-spring-boot3</artifactId>
+    <version>2.2.0</version>
+</dependency>
+
+```
+
+Dependência do spring-boot-starter-aop.
+
+https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop
+
+```xml
+
+<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-aop -->
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-aop</artifactId>
+    <version>3.3.3</version>
+</dependency>
+
+```
