@@ -317,3 +317,108 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 </dependency>
 
 ```
+
+
+***
+## MS-Pagamentos com MySql
+
+Perfil ***dev*** para o MySql - `application-dev.properties`.
+
+Criar o arquivo `application-dev.properties` na pasta `resources`.
+
+```properties
+# Homologação - MySql Local
+# Configurações para conexão com o banco
+spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+spring.datasource.url=jdbc:mysql://localhost:3306/pagamentos\
+                        ?createDatabaseIfNotExist=true\
+                        &useTimezone=true&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root
+
+spring.jpa.generate-ddl=true
+
+# Informa ação DDL inicial do Hibernate
+# create, update, create-drop, validate, none
+spring.jpa.hibernate.ddl-auto=create
+
+# Formata o sql exibido
+spring.jpa.properties.hibernate.format_sql=true
+
+# Exibe / oculta o SQL executado
+spring.jpa.show-sql=true
+```
+
+Criar o arquivo `docker-compose.yml` um diretório acima do diretório raíz da aplicação.
+
+Abrir o arquivo no IntelliJ ou VS Code para edição.
+
+```yml
+# versão do script
+version: '3.9'
+#cada service representa um container
+services:
+#  DB
+  dbmysql:
+    image: mysql:8.0.29
+#    comando executado no container assim que inicializar
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+#      TimeZone
+      TZ: America/Sao_Paulo
+      MYSQL_ROOT_PASSWORD: admin123
+#      usuário que quero criar container MySql
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: admin123
+      MYSQL_DATABASE: pagamentos
+#      permissão de hosts que podem conectar nessa instância - todos
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_TCP_PORT: 3308
+    ports:
+      - 3308:3308
+    expose:
+      - 3308
+    networks:
+      - fiap-network
+#  aplicação
+  pagamentos:
+    image: acrdev/ms-pagamento
+    restart: always
+#    estratégia de build
+#    diretório raíz do projeto para acessar o dockerfile
+    build: ./ms-pagamento
+    working_dir: /ms-pagamento
+    environment:
+#      TimeZone
+      TZ: America/Sao_Paulo
+#      propriedade do spring - application-dev
+      SPRING.DATASOURCE.URL: jdbc:mysql://dbmysql:3308/pagamentos?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC
+      SPRING.DATASOURCE.USERNAME: root
+      SPRING.DATASOURCE.PASSWORD: admin123
+    ports:
+      - 80:80
+#   comando para inicializar a aplicação
+    command: mvn spring-boot:run
+    depends_on:
+      - dbmysql
+    networks:
+      - fiap-network
+# redes que os serviços vão utilizar
+networks:
+    fiap-network:
+      driver: bridge
+```
+
+Para executar o docker-compose precisa gerar o .jar.
+
+Para executar o docker-compose precisa estar no diretório onde está o arquvivo `docker-compose.yml`.
+
+Parar todos os containers.
+
+Digitar o comando no terminal: `docker-compose up -d --build`
+
+Para parar `docker-compose stop`
+
+Para remover `docker-compose down`
+
