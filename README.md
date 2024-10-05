@@ -420,5 +420,7 @@ Digitar o comando no terminal: `docker-compose up -d --build`
 
 Para parar `docker-compose stop`
 
+Para executar `docker-compose start`
+
 Para remover `docker-compose down`
 
