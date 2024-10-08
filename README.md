@@ -317,12 +317,11 @@ https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-
 </dependency>
 
 ```
-
-
 ***
 ## MS-Pagamentos com MySql
 
 Perfil ***dev*** para o MySql - `application-dev.properties`.
+Atualizado para usar com ***Flyway***
 
 Criar o arquivo `application-dev.properties` na pasta `resources`.
 
@@ -335,12 +334,19 @@ spring.datasource.url=jdbc:mysql://localhost:3306/pagamentos\
                         &useTimezone=true&serverTimezone=UTC
 spring.datasource.username=root
 spring.datasource.password=root
+spring.jpa.database.platform=org.hibernate.dialect.MySQLDialect
+
+# Enable flyway
+spring.flyway.baseline-on-migrate=true
+spring.flyway.validate-on-migrate=true
+spring.flyway.enabled=true
+spring.flyway.locations=classpath:db/migration
 
 spring.jpa.generate-ddl=true
 
 # Informa ação DDL inicial do Hibernate
 # create, update, create-drop, validate, none
-spring.jpa.hibernate.ddl-auto=create
+spring.jpa.hibernate.ddl-auto=update
 
 # Formata o sql exibido
 spring.jpa.properties.hibernate.format_sql=true
@@ -350,6 +356,8 @@ spring.jpa.show-sql=true
 ```
 
 Criar o arquivo `docker-compose.yml` um diretório acima do diretório raíz da aplicação.
+
+Ver no github
 
 Abrir o arquivo no IntelliJ ou VS Code para edição.
 
@@ -410,17 +418,42 @@ networks:
       driver: bridge
 ```
 
-Para executar o docker-compose precisa gerar o .jar.
+Para executar o `docker-compose` precisa gerar o `.jar`.
 
-Para executar o docker-compose precisa estar no diretório onde está o arquvivo `docker-compose.yml`.
-
-Parar todos os containers.
+Para executar o `docker-compose` precisa estar no diretório onde está o arquvivo `docker-compose.yml`.
 
 Digitar o comando no terminal: `docker-compose up -d --build`
+
+Parar todos os containers.
 
 Para parar `docker-compose stop`
 
 Para executar `docker-compose start`
 
 Para remover `docker-compose down`
+
+***
+## MySql on Docker
+
+Criar uma pasta com o nome `mysql` preferencialmente no `C:`  e criar o arquivo `docker-compose.yml`.
+
+```yml
+version: '3.8'
+
+services:
+  mysqldb:
+    container_name: mysql_container
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.data/mysql-data:/var/lib/mysql
+
+volumes:
+  mysql-data:
+```
 
