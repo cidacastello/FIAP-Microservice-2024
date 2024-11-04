@@ -456,4 +456,50 @@ services:
 volumes:
   mysql-data:
 ```
+***
+## Spring Security - dependency
+
+Adiconar as dependências no `pom.xml`
+
+```xml
+<dependency>
+	<groupId>org.springframework.boot</groupId>
+	<artifactId>spring-boot-starter-security</artifactId>
+</dependency>
+
+<dependency>
+	<groupId>org.springframework.security</groupId>
+	<artifactId>spring-security-test</artifactId>
+	<scope>test</scope>
+</dependency>
+```
+
+***
+Carga DB.
+User Password - Hash
+Arquivo `import.sql`
+
+```sql
+INSERT INTO tb_user (name, email, password) VALUES('cida', 'cida@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+INSERT INTO tb_user (name, email, password) VALUES('josé', 'jo@gmail.com', '$2a$10$eACCYoNOHEqXve8aIWT8Nu3PkMXWBaOxJ9aORUYzfMQCbVBIhZ8tG');
+
+INSERT INTO tb_role(authority) VALUES('ROLE_ADMIN');
+INSERT INTO tb_role(authority) VALUES('ROLE_MEMBER');
+
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (1, 2);
+INSERT INTO tb_user_role (user_id, role_id) VALUES (2, 2);
+
+INSERT INTO tb_genero(nome) VALUES('Comédia');
+INSERT INTO tb_genero(nome) VALUES('Drama');
+INSERT INTO tb_genero(nome) VALUES('Ação');
+
+INSERT INTO tb_filme(titulo, ano, genero_id) VALUES('Corra', 2000, 3);
+INSERT INTO tb_filme(titulo, ano, genero_id) VALUES('Minha mãe é uma peça', 2012, 1);
+INSERT INTO tb_filme(titulo, ano, genero_id) VALUES('Titanic', 2005, 2);
+
+INSERT INTO tb_review(texto, filme_id, user_id ) VALUES('Muito bom', 1, 1);
+INSERT INTO tb_review(texto, filme_id, user_id ) VALUES('Engraçado', 2, 2);
+
+```
 
